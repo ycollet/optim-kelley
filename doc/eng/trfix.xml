@@ -1,0 +1,174 @@
+<?xml version="1.0" encoding="ISO-8859-1" standalone="no"?>
+<!DOCTYPE MAN SYSTEM "file://C:\Cygwin\scilab-4.1\man/manrev.dtd">
+<MAN>
+  <LANGUAGE>eng</LANGUAGE>
+  <TITLE>trfix</TITLE>
+  <TYPE>Scilab Function  </TYPE>
+  <DATE>12-Jan-2007</DATE>
+  <SHORT_DESCRIPTION name="trfix"> Figure out what the new trust region radius and new point are </SHORT_DESCRIPTION>
+
+  <CALLING_SEQUENCE>
+  <CALLING_SEQUENCE_ITEM>[xp,newrad,idid,sdata,nf] = trfix(xc,f,hc,gc,fc,oldrad,ijob,jdata)</CALLING_SEQUENCE_ITEM>
+  </CALLING_SEQUENCE>
+
+  <PARAM>
+  <PARAM_INDENT>
+
+    <PARAM_ITEM>
+    <PARAM_NAME>xc</PARAM_NAME>
+    <PARAM_DESCRIPTION>
+       <SP>
+       : current point
+       </SP>
+    </PARAM_DESCRIPTION>
+    </PARAM_ITEM>
+
+    <PARAM_ITEM>
+    <PARAM_NAME>f</PARAM_NAME>
+    <PARAM_DESCRIPTION>
+       <SP>
+       : objective
+       </SP>
+    </PARAM_DESCRIPTION>
+    </PARAM_ITEM>
+
+    <PARAM_ITEM>
+    <PARAM_NAME>hc</PARAM_NAME>
+    <PARAM_DESCRIPTION>
+       <SP>
+       : current Hessian
+       </SP>
+    </PARAM_DESCRIPTION>
+    </PARAM_ITEM>
+
+    <PARAM_ITEM>
+    <PARAM_NAME>gc</PARAM_NAME>
+    <PARAM_DESCRIPTION>
+       <SP>
+       : current gradient
+       </SP>
+    </PARAM_DESCRIPTION>
+    </PARAM_ITEM>
+
+    <PARAM_ITEM>
+    <PARAM_NAME>fc</PARAM_NAME>
+    <PARAM_DESCRIPTION>
+       <SP>
+       : current function value
+       </SP>
+    </PARAM_DESCRIPTION>
+    </PARAM_ITEM>
+
+    <PARAM_ITEM>
+    <PARAM_NAME>oldrad</PARAM_NAME>
+    <PARAM_DESCRIPTION>
+       <SP>
+       : current TR radius
+       </SP>
+    </PARAM_DESCRIPTION>
+    </PARAM_ITEM>
+
+    <PARAM_ITEM>
+    <PARAM_NAME>ijob</PARAM_NAME>
+    <PARAM_DESCRIPTION>
+       <SP>
+       : what to do now :
+       1 = fresh start
+       2 = TR radius reduction in progress
+       3 = attempt TR radius expansion
+       </SP>
+    </PARAM_DESCRIPTION>
+    </PARAM_ITEM>
+
+    <PARAM_ITEM>
+    <PARAM_NAME>jdata</PARAM_NAME>
+    <PARAM_DESCRIPTION>
+       <SP>
+       : Newton direction when ijob = 1 or 2, avoids recomputation
+       </SP>
+    </PARAM_DESCRIPTION>
+    </PARAM_ITEM>
+
+    <PARAM_ITEM>
+    <PARAM_NAME>xp</PARAM_NAME>
+    <PARAM_DESCRIPTION>
+       <SP>
+       : new point
+       </SP>
+    </PARAM_DESCRIPTION>
+    </PARAM_ITEM>
+
+    <PARAM_ITEM>
+    <PARAM_NAME>newrad</PARAM_NAME>
+    <PARAM_DESCRIPTION>
+       <SP>
+       : new TR radius
+       </SP>
+    </PARAM_DESCRIPTION>
+    </PARAM_ITEM>
+
+    <PARAM_ITEM>
+    <PARAM_NAME>idid</PARAM_NAME>
+    <PARAM_DESCRIPTION>
+       <SP>
+       : result flag : 
+       1 = step ok
+       2 = TR radius reduced, step not ok
+       3 = expansion attempted, save step and try to do better
+       4 = expansion step failed, use the last good step
+       </SP>
+    </PARAM_DESCRIPTION>
+    </PARAM_ITEM>
+
+    <PARAM_ITEM>
+    <PARAM_NAME>sdata</PARAM_NAME>
+    <PARAM_DESCRIPTION>
+       <SP>
+       : Newton direction to use in next call if idid > 1
+       </SP>
+    </PARAM_DESCRIPTION>
+    </PARAM_ITEM>
+
+    <PARAM_ITEM>
+    <PARAM_NAME>nf</PARAM_NAME>
+    <PARAM_DESCRIPTION>
+       <SP>
+       : number of function evaluations
+       </SP>
+    </PARAM_DESCRIPTION>
+    </PARAM_ITEM>
+  </PARAM_INDENT>
+  </PARAM>
+ 
+  <DESCRIPTION>
+     <DESCRIPTION_INDENT>
+     <DESCRIPTION_ITEM>
+     <P>
+      Figure out what the new trust region radius and new point are
+     </P>
+     </DESCRIPTION_ITEM>
+     </DESCRIPTION_INDENT>
+  </DESCRIPTION>
+
+  <SEE_ALSO>
+    <SEE_ALSO_ITEM> <LINK> optim_kelley_ntrust </LINK> </SEE_ALSO_ITEM>
+  </SEE_ALSO>
+
+  <AUTHORS>
+    <AUTHORS_ITEM label='enter here the author name'>
+    Add here the author  references
+    </AUTHORS_ITEM>
+  </AUTHORS>
+
+  <BIBLIO>
+    <AUTHORS_ITEM label='Kelley'>
+    C. T. Kelley (tim_kelley@ncsu.edu)
+    </AUTHORS_ITEM>
+  </BIBLIO>
+
+  <USED_FUNCTIONS>
+     <SP>
+    C. T. Kelley, "Iterative Methods for Optimization", SIAM, Philadelphia , 1999, Frontiers in Applied Mathematics, 18 
+     </SP>
+  </USED_FUNCTIONS>
+</MAN>

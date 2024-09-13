@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="ISO-8859-1" standalone="no"?>
+<!DOCTYPE MAN SYSTEM "file://C:\Cygwin\scilab-4.1\man/manrev.dtd">
+<MAN>
+  <LANGUAGE>eng</LANGUAGE>
+  <TITLE>polyline</TITLE>
+  <TYPE>Scilab Function  </TYPE>
+  <DATE>12-Jan-2007</DATE>
+  <SHORT_DESCRIPTION name="polyline"> polynomial line search, call after first point is rejected </SHORT_DESCRIPTION>
+
+  <CALLING_SEQUENCE>
+  <CALLING_SEQUENCE_ITEM>[xp,idid,lambda] = polyline(xc,fc,gc,d,ft,f,maxarm)</CALLING_SEQUENCE_ITEM>
+  </CALLING_SEQUENCE>
+
+  <PARAM>
+  <PARAM_INDENT>
+
+    <PARAM_ITEM>
+    <PARAM_NAME>xc</PARAM_NAME>
+    <PARAM_DESCRIPTION>
+       <SP>
+       : current point
+       </SP>
+    </PARAM_DESCRIPTION>
+    </PARAM_ITEM>
+
+    <PARAM_ITEM>
+    <PARAM_NAME>fc</PARAM_NAME>
+    <PARAM_DESCRIPTION>
+       <SP>
+       : current function value
+       </SP>
+    </PARAM_DESCRIPTION>
+    </PARAM_ITEM>
+
+    <PARAM_ITEM>
+    <PARAM_NAME>gc</PARAM_NAME>
+    <PARAM_DESCRIPTION>
+       <SP>
+       : current gradient value
+       </SP>
+    </PARAM_DESCRIPTION>
+    </PARAM_ITEM>
+
+    <PARAM_ITEM>
+    <PARAM_NAME>d</PARAM_NAME>
+    <PARAM_DESCRIPTION>
+       <SP>
+       : direction
+       </SP>
+    </PARAM_DESCRIPTION>
+    </PARAM_ITEM>
+
+    <PARAM_ITEM>
+    <PARAM_NAME>ft</PARAM_NAME>
+    <PARAM_DESCRIPTION>
+       <SP>
+       : trial function (rejected value)
+       </SP>
+    </PARAM_DESCRIPTION>
+    </PARAM_ITEM>
+
+    <PARAM_ITEM>
+    <PARAM_NAME>f</PARAM_NAME>
+    <PARAM_DESCRIPTION>
+       <SP>
+       : objective function. The calling sequence for f should be [fout,gout]=f(x) where fout=f(x) is a scalar and gout = grad f(x) is a COLUMN vector
+       </SP>
+    </PARAM_DESCRIPTION>
+    </PARAM_ITEM>
+
+    <PARAM_ITEM>
+    <PARAM_NAME>maxarm</PARAM_NAME>
+    <PARAM_DESCRIPTION>
+       <SP>
+       : maximum number of step length reductions  
+       </SP>
+    </PARAM_DESCRIPTION>
+    </PARAM_ITEM>
+
+    <PARAM_ITEM>
+    <PARAM_NAME>xp</PARAM_NAME>
+    <PARAM_DESCRIPTION>
+       <SP>
+       : successful new point (if it exists)
+       </SP>
+    </PARAM_DESCRIPTION>
+    </PARAM_ITEM>
+
+    <PARAM_ITEM>
+    <PARAM_NAME>idid</PARAM_NAME>
+    <PARAM_DESCRIPTION>
+       <SP>
+       : number of calls to f (if line search succeeds) or -1 if line search fails.
+       </SP>
+    </PARAM_DESCRIPTION>
+    </PARAM_ITEM>
+
+    <PARAM_ITEM>
+    <PARAM_NAME>lambda</PARAM_NAME>
+    <PARAM_DESCRIPTION>
+       <SP>
+       : minimizer lambda of the cubic polynomial (see polymod)
+       </SP>
+    </PARAM_DESCRIPTION>
+    </PARAM_ITEM>
+  </PARAM_INDENT>
+  </PARAM>
+ 
+  <DESCRIPTION>
+     <DESCRIPTION_INDENT>
+     <DESCRIPTION_ITEM>
+     <P>
+      polynomial line search, call after first point is rejected
+     </P>
+     </DESCRIPTION_ITEM>
+     </DESCRIPTION_INDENT>
+  </DESCRIPTION>
+
+  <SEE_ALSO>
+    <SEE_ALSO_ITEM> <LINK> polymod </LINK> </SEE_ALSO_ITEM>
+    <SEE_ALSO_ITEM> <LINK> optim_kelley_bfgswopt </LINK> </SEE_ALSO_ITEM>
+  </SEE_ALSO>
+
+  <AUTHORS>
+    <AUTHORS_ITEM label='Kelley'>
+    C. T. Kelley (tim_kelley@ncsu.edu)
+    </AUTHORS_ITEM>
+  </AUTHORS>
+
+  <BIBLIO>
+    <SP>
+    C. T. Kelley, "Iterative Methods for Optimization", SIAM, Philadelphia , 1999, Frontiers in Applied Mathematics, 18 
+    </SP>
+  </BIBLIO>
+</MAN>

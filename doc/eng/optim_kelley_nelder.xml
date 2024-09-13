@@ -1,0 +1,202 @@
+<?xml version="1.0" encoding="ISO-8859-1" standalone="no"?>
+<!DOCTYPE MAN SYSTEM "file://C:\Cygwin\scilab-4.1\man/manrev.dtd">
+<MAN>
+  <LANGUAGE>eng</LANGUAGE>
+  <TITLE>optim_kelley_nelder</TITLE>
+  <TYPE>Scilab Function  </TYPE>
+  <DATE>12-Jan-2007</DATE>
+  <SHORT_DESCRIPTION name="optim_kelley_nelder"> Nelder-Mead optimizer, No tie-breaking rule other than Scilab's sort </SHORT_DESCRIPTION>
+
+  <CALLING_SEQUENCE>
+  <CALLING_SEQUENCE_ITEM>[x,lhist,histout,simpdata] = optim_kelley_nelder(x0,f,tol,maxit,budget)</CALLING_SEQUENCE_ITEM>
+  </CALLING_SEQUENCE>
+
+  <PARAM>
+  <PARAM_INDENT>
+
+    <PARAM_ITEM>
+    <PARAM_NAME>x0</PARAM_NAME>
+    <PARAM_DESCRIPTION>
+       <SP>
+       : vertices of initial simplex = x0 (n x n+1 matrix). The code will order the vertices for you and no benefit is accrued if you do it yourself.
+       </SP>
+    </PARAM_DESCRIPTION>
+    </PARAM_ITEM>
+
+    <PARAM_ITEM>
+    <PARAM_NAME>f</PARAM_NAME>
+    <PARAM_DESCRIPTION>
+       <SP>
+       : objective function
+       </SP>
+    </PARAM_DESCRIPTION>
+    </PARAM_ITEM>
+
+    <PARAM_ITEM>
+    <PARAM_NAME>tol</PARAM_NAME>
+    <PARAM_DESCRIPTION>
+       <SP>
+       : termination tolerance
+       </SP>
+    </PARAM_DESCRIPTION>
+    </PARAM_ITEM>
+
+    <PARAM_ITEM>
+    <PARAM_NAME>maxit</PARAM_NAME>
+    <PARAM_DESCRIPTION>
+       <SP>
+       : maximum number of iterations = maxit (default = 100)
+       </SP>
+    </PARAM_DESCRIPTION>
+    </PARAM_ITEM>
+
+    <PARAM_ITEM>
+    <PARAM_NAME>budget</PARAM_NAME>
+    <PARAM_DESCRIPTION>
+       <SP>
+       : max f evals (default=50*number of variables). The iteration will terminate after the iteration that exhausts the budget
+       </SP>
+    </PARAM_DESCRIPTION>
+    </PARAM_ITEM>
+
+    <PARAM_ITEM>
+    <PARAM_NAME>x</PARAM_NAME>
+    <PARAM_DESCRIPTION>
+       <SP>
+       : final simplex = x (n x n+1) matrix
+       </SP>
+    </PARAM_DESCRIPTION>
+    </PARAM_ITEM>
+
+    <PARAM_ITEM>
+    <PARAM_NAME>lhist</PARAM_NAME>
+    <PARAM_DESCRIPTION>
+       <SP>
+       : number of iterations before termination (optional)
+       </SP>
+    </PARAM_DESCRIPTION>
+    </PARAM_ITEM>
+
+    <PARAM_ITEM>
+    <PARAM_NAME>histout</PARAM_NAME>
+    <PARAM_DESCRIPTION>
+       <SP>
+       : = iteration history, updated after each nonlinear iteration = lhist x 5 array, the rows are
+       [fcount, fval, norm(grad), dist, diam]
+       fcount = cumulative function evals
+       fval = current best function value
+       norm(grad) = current simplex grad norm
+       dist = difference between worst and best values
+       diam = max oriented length
+       </SP>
+    </PARAM_DESCRIPTION>
+    </PARAM_ITEM>
+
+    <PARAM_ITEM>
+    <PARAM_NAME>simpdata</PARAM_NAME>
+    <PARAM_DESCRIPTION>
+       <SP>
+       : data for simplex gradient restart = [norm(grad), cond(v), bar f]
+       </SP>
+    </PARAM_DESCRIPTION>
+    </PARAM_ITEM>
+  </PARAM_INDENT>
+  </PARAM>
+ 
+  <DESCRIPTION>
+     <DESCRIPTION_INDENT>
+     <DESCRIPTION_ITEM>
+     <P>
+      Nelder-Mead optimizer, No tie-breaking rule other than Scilab's sort
+     </P>
+     </DESCRIPTION_ITEM>
+     </DESCRIPTION_INDENT>
+  </DESCRIPTION>
+
+  <EXAMPLE><![CDATA[
+  function Res = get_min_bound_rosenbrock()
+  Res = [-2 -2]';
+  endfunction
+  function Res = get_max_bound_rosenbrock()
+  Res = [2 2]';
+  endfunction
+  function Res = get_opti_rosenbrock()
+  Res = [1 1]';
+  endfunction
+  function y = rosenbrock(x)
+  y = 100*(x(2)-x(1)^2)^2+(1-x(1))^2;
+  endfunction
+  MaxIt     = 1000;
+  Tol       = 1e-6;
+  GradTol   = 1e-12;
+
+  Min = get_min_bound_rosenbrock();
+  Max = get_max_bound_rosenbrock();
+
+  //
+  // Display the cost function
+  //
+
+  clf();
+
+  x1 = Min(1):(Max(1)-Min(1))/100:Max(1);
+  x2 = Min(2):(Max(2)-Min(2))/100:Max(2);
+  for i=1:length(x1)
+    for j=1:length(x2)
+      z(i,j) = functoopt([x1(i) x2(j)]);
+    end
+  end
+  xset('fpf',' ');
+  contour(x1, x2, z, 20);
+
+  function [f, g] = f_optim(x)
+  f = functoopt(x);
+  g = derivative(functoopt, x); g = g'; // ??
+  endfunction
+
+  function [f, g, jac] = f_optim_2(x)
+  f = functoopt(x);
+  [g, jac] = derivative(functoopt, x); g = g'; jac = jac';// ??
+  endfunction
+
+  xtitle(Title + ' function - optim_kelley_nelder','x1','x2');
+
+  printf('optim_kelley_nelder:\n');
+  printf('Nelder-Mead optimizer, No tie-breaking rule other than MATLAB''s sort\n');
+
+  xset('fpf',' ');
+  contour(x1, x2, z, 20);
+
+  x0_nelder = [];
+  x0_nelder(:,1) = (Max - Min).*rand(2,1) + Min;
+  x0_nelder(:,2) = (Max - Min).*rand(2,1) + Min;
+  x0_nelder(:,3) = (Max - Min).*rand(2,1) + Min;
+  //x0_nelder = x0_nelder';
+
+  plot(x0_nelder(1,:), x0_nelder(2,:), 'ro');
+
+  [x_opt, histout, costdata] = optim_kelley_nelder(x0_nelder, f_optim, Tol, MaxIt);
+
+  plot(x_opt(1,:), x_opt(2,:), 'go');
+
+  printf('optim_kelley_nelder: Starting simpled x0_nelder:'); disp(x0_nelder);
+  printf('optim_kelley_nelder: Final simplex x_opt:'); disp(x_opt);
+  ]]></EXAMPLE>
+
+  <SEE_ALSO>
+    <SEE_ALSO_ITEM> <LINK> optim_kelley_hooke </LINK> </SEE_ALSO_ITEM>
+    <SEE_ALSO_ITEM> <LINK> optim_kelley_steep </LINK> </SEE_ALSO_ITEM>
+  </SEE_ALSO>
+
+  <AUTHORS>
+    <AUTHORS_ITEM label='Kelley'>
+    C. T. Kelley (tim_kelley@ncsu.edu)
+    </AUTHORS_ITEM>
+  </AUTHORS>
+
+  <BIBLIO>
+    <SP>
+    C. T. Kelley, "Iterative Methods for Optimization", SIAM, Philadelphia , 1999, Frontiers in Applied Mathematics, 18 
+    </SP>
+  </BIBLIO>
+</MAN>

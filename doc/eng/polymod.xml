@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="ISO-8859-1" standalone="no"?>
+<!DOCTYPE MAN SYSTEM "file://C:\Cygwin\scilab-4.1\man/manrev.dtd">
+<MAN>
+  <LANGUAGE>eng</LANGUAGE>
+  <TITLE>polymod</TITLE>
+  <TYPE>Scilab Function  </TYPE>
+  <DATE>12-Jan-2007</DATE>
+  <SHORT_DESCRIPTION name="polymod">  Cubic/quadratic polynomial linesearch </SHORT_DESCRIPTION>
+
+  <CALLING_SEQUENCE>
+  <CALLING_SEQUENCE_ITEM>lplus = polymod(q0,qp0,lamc,qc,blow,bhigh,lamm,qm)</CALLING_SEQUENCE_ITEM>
+  </CALLING_SEQUENCE>
+ 
+  <DESCRIPTION>
+     <DESCRIPTION_INDENT>
+     <DESCRIPTION_ITEM>
+     <P>
+      Cubic/quadratic polynomial linesearch
+      
+      Finds minimizer lambda of the cubic polynomial q on the interval [blow * lamc, bhigh * lamc] such that
+      q(0) = q0, q'(0) = qp0, q(lamc) = qc, q(lamm) = qm
+      if data for a cubic is not available (first stepsize reduction) then q is the quadratic such that
+      q(0) = q0, q'(0) = qp0, q(lamc) = qc 
+     </P>
+     </DESCRIPTION_ITEM>
+     </DESCRIPTION_INDENT>
+  </DESCRIPTION>
+
+  <SEE_ALSO>
+    <SEE_ALSO_ITEM> <LINK> polyline </LINK> </SEE_ALSO_ITEM>
+    <SEE_ALSO_ITEM> <LINK> optim_kelley_bfgswopt </LINK> </SEE_ALSO_ITEM>
+  </SEE_ALSO>
+
+  <AUTHORS>
+    <AUTHORS_ITEM label='Kelley'>
+    C. T. Kelley (tim_kelley@ncsu.edu)
+    </AUTHORS_ITEM>
+  </AUTHORS>
+
+  <BIBLIO>
+    <SP>
+    C. T. Kelley, "Iterative Methods for Optimization", SIAM, Philadelphia , 1999, Frontiers in Applied Mathematics, 18 
+    </SP>
+  </BIBLIO>
+</MAN>
